@@ -11,7 +11,8 @@ body {
 }
 
 .form .fa-search {
-    color: #9ca3af
+    color: #9ca3af;
+    cursor:pointer
 }
 
 .form span {
@@ -34,6 +35,17 @@ body {
     height: 55px;
     text-indent: 33px;
     border-radius: 30px!important;
+}
+
+.container_proposition{
+    border-radius: 15px!important;
+}
+
+.container_proposition.cacher {
+    display: none;
+}
+.container_proposition.afficher {
+    display: block;
 }
 
 .form-input:focus {
