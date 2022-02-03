@@ -1,11 +1,23 @@
 $(document).on('keyup', '#input_recherche', throttle(function () {
     if ($(this).val() !== '') {
-        $('.container_proposition').removeClass('cacher').addClass('afficher');
+        let definitions = chercherMotCle($(this).val());
+        afficherDefinitionTrouve(definitions);
     } else {
         $('.container_proposition').removeClass('afficher').addClass('cacher');
 
     }
 }));
+
+afficherDefinitionTrouve = (arrayDefinition) => {
+    let htmlDefinition = '';
+    
+    $(arrayDefinition).each((key, definition) => {
+        htmlDefinition = htmlDefinition + '<button type="button" class="list-group-item list-group-item-action">'+definition+'</button>'
+    });
+    let containerDefinition = $('.container_proposition');
+    $(containerDefinition).html(htmlDefinition).removeClass('cacher').addClass('afficher');
+
+}
 
 /**
  * fonction qui met un temps d'attente avant d'excuter une fonction (500 ms)
