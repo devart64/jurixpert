@@ -29,27 +29,33 @@ const reponse = [
     "<p>Constat amiable : Votre véhicule est endommagé suite à un accrochage avec une voiture ou un autre véhicule et vous vous demandez comment faire un constat ? La réalisation de ce constat amiable voiture servira de base à l'assureur pour vous indemniser. Pour ne pas être pris au dépourvu et savoir que faire en cas d’accident de voiture ou plus globalement d’accident de la circulation, découvrez tous les éléments que doit comporter votre constat :</p><ul><li>les caractéristiques de l'accident (date, localisation, etc.).</li> <li>les dommages matériels et corporels.</li> <li>les témoins.</li> <li>les personnes et conducteurs impliqués.</li> <li>les coordonnées des sociétés d'assurance.</li> <li>la nature de l'accident et son croquis.</li> <li>la signature des conducteurs.</li></ul><p>Découvrez tous les conseils de la Macif pour remplir votre constat amiable dans les règles de l’art et pour savoir comment agir une fois le constat amiable rempli.</p>"
 ];
 
-chercherMotCle = (motCle) => {
+chercherMotCle = (motCles) => {
     let arrayDefinition = new Array();
-    $(definition).each(function(key, obj){
-        if(obj.motCle.indexOf(motCle) !== -1) {
-            console.log('mot clé trouvé: '+motCle);
-            
-            if(motCle === obj.motCle) {
-                $(obj.definition).each((index, definition) => {
-                    arrayDefinition.push(definition);
-                })
+    for (const [index, motCle] of Object.entries(motCles)) {
+        $(definition).each(function(key, obj){
+            if(obj.motCle.indexOf(motCle) !== -1) {
+                console.log('mot clé trouvé: '+motCle);
                 
-            } else {
-                let motCleDef = obj.motCle;
-                console.log(motCleDef.slice(0, motCle.length))
-                console.log(motCleDef.slice(motCle.length, motCleDef.length))
-                let motFinal= '<span class="highlight_keyword">'+motCleDef.slice(0, motCle.length)+'</span>'+motCleDef.slice(motCle.length, motCleDef.length);
-                arrayDefinition.push(motFinal);
+                if(motCle === obj.motCle) {
+                    $(obj.definition).each((index, definition) => {
+                        let definitionFinale = ajoutHighLightMotsTrouveDansTexte(definition, [motCle]);
+                        arrayDefinition.push(definitionFinale);
+                    })
+                    
+                } else {
+                    let motCleDef = obj.motCle;
+                    console.log(motCleDef.slice(0, motCle.length))
+                    console.log(motCleDef.slice(motCle.length, motCleDef.length))
+                    //let motFinal= '<span class="highlight_keyword">'+motCleDef.slice(0, motCle.length)+'</span>'+motCleDef.slice(motCle.length, motCleDef.length);
+                    let motFinal = ajoutHighLightMotsTrouveDansTexte(motCleDef, [motCle]);
+                    
+                    arrayDefinition.push(motFinal);
+                }
+               
             }
-           
-        }
-    });
+        });
+    }
+    
     console.log(arrayDefinition)
     return arrayDefinition;
 }

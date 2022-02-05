@@ -57,3 +57,13 @@ body {
 .highlight_keyword {
     background-color: yellow;
 }
+
+.highlight.jaune{
+    background-color: yellow;
+    color: #67757c;
+}
+
+.highlight.orange{
+    background-color: orange;
+    color: #67757c;
+}
